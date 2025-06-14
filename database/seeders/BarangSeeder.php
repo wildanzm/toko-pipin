@@ -17,6 +17,7 @@ class BarangSeeder extends Seeder
                 'harga_beli' => 26000,
                 'harga_jual' => 28000,
                 'nama_toko_suplier' => 'Adi Maja',
+                'jenis_stock' => 'kg',
             ],
             [
                 'nama_barang' => 'Minyak',
@@ -24,6 +25,7 @@ class BarangSeeder extends Seeder
                 'harga_beli' => 16700,
                 'harga_jual' => 18500,
                 'nama_toko_suplier' => 'Toko Pintu 3',
+                'jenis_stock' => 'liter',
             ],
             [
                 'nama_barang' => 'Beras',
@@ -31,6 +33,7 @@ class BarangSeeder extends Seeder
                 'harga_beli' => 12800,
                 'harga_jual' => 14000,
                 'nama_toko_suplier' => 'Toko Sandi',
+                'jenis_stock' => 'kg',
             ],
             [
                 'nama_barang' => 'GULA',
@@ -38,6 +41,7 @@ class BarangSeeder extends Seeder
                 'harga_beli' => 15000,
                 'harga_jual' => 17000,
                 'nama_toko_suplier' => 'Toko Sandi',
+                'jenis_stock' => 'kg',
             ],
         ];
 

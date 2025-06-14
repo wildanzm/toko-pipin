@@ -9,14 +9,14 @@ return new class extends Migration {
     {
 
         Schema::table('stock_barangs', function (Blueprint $table) {
-            $table->enum('jenis_stok', ['pcs', 'liter', 'kg'])->default('pcs');
+            $table->enum('jenis_stock', ['pcs', 'liter', 'kg'])->default('pcs');
         });
     }
 
     public function down(): void
     {
         Schema::table('stock_barangs', function (Blueprint $table) {
-            $table->dropColumn('jenis_stok');
+            $table->dropColumn('jenis_stock');
             $table->string('jenis_stok')->default('pcs');
         });
     }

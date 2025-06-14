@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->decimal('harga_beli', 15, 2);
             $table->decimal('harga_jual', 15, 2);
             $table->string('nama_toko_suplier');
+            $table->string('jenis_stock');
             $table->timestamps();
         });
     }
