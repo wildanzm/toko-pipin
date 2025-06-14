@@ -12,7 +12,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 
 #[Layout('components.layouts.admin')]
-#[Title('Kelola Pembelian Barang')]
+#[Title('Kelola Barang')]
 class Index extends Component
 {
     use WithPagination;
@@ -56,7 +56,7 @@ class Index extends Component
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'laporan-pembelian-barang.pdf');
+        }, 'laporan-barang.pdf');
     }
 
 

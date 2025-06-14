@@ -30,6 +30,7 @@ class StockBarangSeeder extends Seeder
                 'kodebarang'         => $barang->kodebarang,
                 'harga_per_satu'     => $harga_per_satu,
                 'kuantitas'          => $kuantitas,
+                'jenis_stok'         => $barang->jenis_stock,
                 'harga_total'        => $harga_total,
                 'pembayaran'         => $pembayaran,
                 'jenis_pembayaran'   => 'tunai',

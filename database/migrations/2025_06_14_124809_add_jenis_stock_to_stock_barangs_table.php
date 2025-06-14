@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('stock_barangs', function (Blueprint $table) {
-            $table->string('jenis_stock')->nullable()->after('kuantitas');
+            $table->string('jenis_stok')->nullable()->after('kuantitas');
             // Jika ingin enum:
             // $table->enum('jenis_stock', ['masuk', 'keluar', 'retur'])->after('kuantitas');
         });
@@ -17,7 +17,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('stock_barangs', function (Blueprint $table) {
-            $table->dropColumn('jenis_stock');
+            $table->dropColumn('jenis_stok');
         });
     }
 };

@@ -5,7 +5,7 @@ namespace App\Livewire\Admin\Barang;
 use Livewire\Component;
 use App\Models\StockBarang;
 use App\Models\Hutang as HutangModel;
-// pastikan modelnya tersedia
+ // pastikan modelnya tersedia
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -39,8 +39,8 @@ class Hutang extends Component
         foreach ($dataKredit as $data) {
             // Cek apakah data dengan nama_barang dan toko yang sama sudah ada di tabel hutang
             $sudahAda = HutangModel::where('nama_barang', $data->nama_barang)
-                ->where('toko', $data->nama_toko_suplier)
-                ->exists();
+                              ->where('toko', $data->nama_toko_suplier)
+                              ->exists();
 
             if (! $sudahAda) {
                 $status = $data->status_pembayaran === 'lunas' ? 'lunas' : 'hutang';
@@ -48,7 +48,7 @@ class Hutang extends Component
                 HutangModel::create([
                     'nama_barang'     => $data->nama_barang,
                     'toko'            => $data->nama_toko_suplier,
-                    'jenis_pembayaran' => $data->jenis_pembayaran,
+                    'jenis_pembayaran'=> $data->jenis_pembayaran,
                     'status' => $status,
                     'nominal_hutang'  => $data->hutang,
                 ]);
@@ -61,10 +61,10 @@ class Hutang extends Component
         $hutangBarangs = HutangModel::latest()->get();
 
         $pdf = Pdf::loadView('exports.hutang-barang', compact('hutangBarangs'))
-            ->setPaper('a4', 'landscape');
+                  ->setPaper('a4', 'landscape');
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'laporan-hutang-pembelian-barang.pdf');
+        }, 'laporan-hutang-barang.pdf');
     }
 }

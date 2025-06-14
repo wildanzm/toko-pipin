@@ -1,5 +1,5 @@
 <div>
-    <h1 class="text-3xl font-bold pb-5 dark:text-white">Laporan Hutang Pembelian Barang</h1>
+    <h1 class="text-3xl font-bold pb-5 dark:text-white">Laporan Hutang Barang</h1>
 
     <div class="flex justify-end mb-4">
         <a href="{{ route('admin.hutang.export') }}"
