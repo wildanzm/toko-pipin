@@ -1,15 +1,16 @@
 <div>
-    <h1 class="text-3xl font-bold pb-5 dark:text-white">Laporan Hutang Barang</h1>
+    <h1 class="text-3xl font-bold pb-5 dark:text-white">Laporan Hutang Pembelian</h1>
 
     <div class="flex justify-end mb-4">
         <a href="{{ route('admin.hutang.export') }}"
-           class="px-4 py-2 text-sm text-white bg-red-600 rounded hover:bg-red-700 transition">
+            class="px-4 py-2 text-sm text-white bg-red-600 rounded hover:bg-red-700 transition">
             Export PDF
         </a>
     </div>
 
     @if (session()->has('message'))
-        <div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+        <div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+            role="alert">
             {{ session('message') }}
         </div>
     @endif
@@ -37,11 +38,13 @@
                         <td class="px-6 py-4 text-center capitalize">{{ $item->jenis_pembayaran }}</td>
                         <td class="px-6 py-4 text-center">
                             @if ($item->status === 'lunas')
-                                <span class="inline-block px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-full">
+                                <span
+                                    class="inline-block px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-full">
                                     Lunas
                                 </span>
                             @else
-                                <span class="inline-block px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-full">
+                                <span
+                                    class="inline-block px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-full">
                                     Belum Lunas
                                 </span>
                             @endif

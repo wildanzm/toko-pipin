@@ -2,11 +2,11 @@
     <div>
         <div class="py-6 px-4 sm:px-6 lg:px-8">
             <div class="mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-                <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Tambah Barang</h1>
+                <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Tambah Data Pembelian</h1>
                 {{-- Asumsi Anda memiliki route untuk kembali ke daftar produk --}}
                 <a href="{{ route('admin.barang.index') }}"
                     class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                    &larr; Kembali ke Daftar Barang
+                    &larr; Kembali ke Data Pembelian Barang
                 </a>
             </div>
 
@@ -113,7 +113,7 @@
                 <div class="flex justify-end pt-4">
                     <button type="submit" wire:loading.attr="disabled" wire:target="saveProduct"
                         class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-75 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800">
-                        <span wire:loading.remove wire:target="saveProduct">Tambah Barang</span>
+                        <span wire:loading.remove wire:target="saveProduct">Tambah Data Pembelian</span>
                         <span wire:loading wire:target="saveProduct">Menyimpan...</span>
                     </button>
                 </div>

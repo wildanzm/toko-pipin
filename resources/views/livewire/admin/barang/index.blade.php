@@ -1,5 +1,5 @@
 <div>
-    <h1 class="text-3xl font-bold pb-5 dark:text-white">Daftar Barang</h1>
+    <h1 class="text-3xl font-bold pb-5 dark:text-white">Data Pembelian Barang</h1>
 
     @if (session()->has('message'))
         <div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
@@ -20,7 +20,7 @@
             </div>
             <input wire:model.live.debounce.300ms="search" type="text" id="table-search"
                 class="block w-full p-2.5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Cari Barang...">
+                placeholder="Cari">
         </div>
         <div class="mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
     {{-- Input Pencarian dengan Ikon --}}
@@ -44,7 +44,7 @@
                         d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                         clip-rule="evenodd"></path>
                 </svg>
-                Tambah Produk Baru
+                Tambah Data Pembelian
             </a>
         </div>
     </div>

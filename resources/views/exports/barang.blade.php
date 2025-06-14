@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Barang</title>
+    <title>Laporan Pembelian Barang</title>
     <style>
         body { font-family: sans-serif; }
         table { width: 100%; border-collapse: collapse; font-size: 12px; }
@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">Laporan Barang Masuk</h2>
+    <h2 style="text-align: center;">Laporan Pembelian Barang</h2>
     <table>
         <thead>
             <tr>

@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Hutang Barang</title>
+    <title>Laporan Hutang Pembelian Barang</title>
     <style>
         body { font-family: sans-serif; font-size: 12px; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">Laporan Hutang Barang</h2>
+    <h2 style="text-align: center;">Laporan Hutang Pembelian Barang</h2>
 
     <table>
         <thead>

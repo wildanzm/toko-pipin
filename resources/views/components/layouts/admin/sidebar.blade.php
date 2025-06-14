@@ -25,7 +25,7 @@
         {{-- Kontainer utama sidebar dibuat flex column untuk mendorong profil ke bawah --}}
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col">
             <a href="{{ route('admin.dashboard') }}" class="flex items-center ps-2.5 mb-5">
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Tokopipin</span>
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Toko Pipin</span>
             </a>
 
             {{-- Menu Utama --}}
@@ -60,7 +60,7 @@
                             <path
                                 d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
                         </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Kelola Barang</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Pembelian</span>
                     </a>
                 </li>
                 <!-- <li>
