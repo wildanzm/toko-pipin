@@ -5,7 +5,7 @@
             class="w-full sm:max-w-md md:w-[500px] bg-white p-6 md:py-[50px] md:px-[30px] flex flex-col gap-5 rounded-xl md:rounded-3xl border border-[#E5E5E5] shadow-md">
             @csrf
             <div class="flex justify-center mb-4">
-                <h1 class="font-bold text-black text-2xl sm:text-3xl">Tokopipin</h1>
+                <h1 class="font-bold text-black text-2xl sm:text-3xl">Toko Pipin</h1>
             </div>
 
             {{-- General Login Error --}}
