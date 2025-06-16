@@ -18,8 +18,8 @@
                     $table->decimal('harga_total', 15, 2);    // HargaBarangTotal
                     $table->integer('kuantitas');             // KuantitasBarang
                     $table->string('nama_toko_suplier');      // NamaTokoSuplier
-                    $table->enum('jenis_pembayaran', ['kredit', 'tunai']); // Kredit / Tunai
-                    $table->enum('status_pembayaran', ['belum_lunas', 'lunas']); // Status pembayaran
+                    $table->enum('jenis_pembayaran', ['kredit', 'tunai', '-']); // Kredit / Tunai
+                    $table->enum('status_pembayaran', ['belum_lunas', 'lunas', '-']); // Status pembayaran
                     $table->decimal('hutang', 15, 2)->nullable(); // HutangJikaAda
                     $table->timestamps(); // created_at dan updated_at
                 });

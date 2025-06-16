@@ -12,6 +12,7 @@
 </head>
 <body>
     <h2 style="text-align: center;">Laporan Pembelian Barang</h2>
+    <h3 style="text-align: center;">Toko Pipin</h3>
     <table>
         <thead>
             <tr>
@@ -19,10 +20,15 @@
                 <th>Nama Barang</th>
                 <th>Kode</th>
                 <th>Toko</th>
-                <th>Harga Beli</th>
                 <th>Stok</th>
+                <th>Harga Beli</th>
+                <th>Harga Total</th>
+                <th>Hutang</th>
                 <th>Pembayaran</th>
                 <th>Status</th>
+                <th>Metode Pembelian</th>
+                <th>Status Pembelian</th>
+                <th>Waktu</th>
             </tr>
         </thead>
         <tbody>
@@ -32,10 +38,15 @@
                 <td>{{ $barang->nama_barang }}</td>
                 <td>{{ $barang->kodebarang }}</td>
                 <td>{{ $barang->nama_toko_suplier }}</td>
-                <td>Rp {{ number_format($barang->harga_per_satu, 0, ',', '.') }}</td>
                 <td>{{ $barang->kuantitas }} {{ $barang->jenis_stok }}</td>
+                <td>Rp {{ number_format($barang->harga_per_satu, 0, ',', '.') }}</td>
+                <td>Rp {{ number_format($barang->harga_total, 0, ',', '.') }}</td>
+                <td>Rp {{ number_format($barang->hutang, 0, ',', '.') }}</td>
                 <td>Rp {{ number_format($barang->pembayaran, 0, ',', '.') }}</td>
                 <td>{{ ucfirst($barang->status_pembayaran) }}</td>
+                <td>{{ ucfirst($barang->jenis_pembayaran ?? '-') }}</td>
+                <td>{{ ucfirst($barang->status_pembelian ?? '-') }}</td>
+                <td>{{ $barang->created_at ? $barang->created_at->format('d-m-Y H:i') : '-' }}</td>
             </tr>
             @endforeach
         </tbody>

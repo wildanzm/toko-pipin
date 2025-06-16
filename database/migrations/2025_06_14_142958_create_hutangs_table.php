@@ -13,7 +13,7 @@ class CreateHutangsTable extends Migration
             $table->string('nama_barang');
             $table->string('toko');
             $table->string('jenis_pembayaran'); // misal: tunai, kredit
-            $table->enum('status', ['lunas', 'hutang'])->default('hutang');
+            $table->enum('status', ['lunas', 'hutang', '-'])->default('hutang');
             $table->decimal('nominal_hutang', 15, 2)->default(0);
             $table->timestamps();
         });

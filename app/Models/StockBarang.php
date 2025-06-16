@@ -23,6 +23,7 @@ class StockBarang extends Model
         'jenis_pembayaran',
         'status_pembayaran',
         'hutang',
+        'status_pembelian'
     ];
 
 }
