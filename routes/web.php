@@ -43,6 +43,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/hutang', Hutang::class)->name('hutang');
     Route::get('/hutang/export', [Hutang::class, 'exportPdf'])->name('hutang.export');
 
+    Route::get('/retur', \App\Livewire\Admin\Retur\Index::class)->name('retur');
+    Route::get('/retur/export', [\App\Livewire\Admin\Retur\Index::class, 'exportPdf'])->name('retur.export');
+
     
 });
 

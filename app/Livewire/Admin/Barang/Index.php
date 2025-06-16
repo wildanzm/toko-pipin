@@ -116,19 +116,33 @@ class Index extends Component
             $barang = StockBarang::find($this->editingBarang['id']);
 
             if ($barang) {
+                // Ambil inputan user
                 $barang->jenis_pembayaran = $this->editingBarang['jenis_pembayaran'] ?? null;
-                $barang->pembayaran = $this->editingBarang['pembayaran'] ?? null;
-                if ($barang->jenis_pembayaran === 'kredit') {
-                    $barang->hutang = max(($barang->harga_per_satu * $barang->kuantitas) - ($barang->pembayaran ?? 0), 0);
-                    $barang->status_pembayaran = $barang->hutang > 0 ? 'belum_lunas' : 'lunas';
-                } else {
-                    $barang->hutang = 0;
-                    $barang->status_pembayaran = 'lunas';
+                $barang->pembayaran = $this->editingBarang['pembayaran'] ?? 0;
+                $barang->status_pembelian = $this->editingBarang['status_pembelian'] ?? null;
+
+                // Hitung harga total (dari data di DB)
+                $hargaTotal = $barang->harga_per_satu * $barang->kuantitas;
+
+                // Jika tunai, maka pembayaran = harga total
+                if ($barang->jenis_pembayaran === 'tunai') {
+                    $barang->pembayaran = $hargaTotal;
                 }
 
+                // Hitung hutang (harga total - pembayaran)
+                $barang->hutang = max($hargaTotal - $barang->pembayaran, 0);
+
+                // Set status_pembayaran berdasarkan status_pembelian
+                if ($barang->status_pembelian === 'Dikembalikan') {
+                    $barang->status_pembayaran = '-';
+                } else {
+                    $barang->status_pembayaran = $barang->hutang > 0 ? 'belum_lunas' : 'lunas';
+                }
+
+                // Simpan perubahan
                 $barang->save();
 
-                session()->flash('message', 'Jenis pembayaran berhasil diperbarui.');
+                session()->flash('message', 'Data berhasil diperbarui.');
             } else {
                 session()->flash('message', 'Barang tidak ditemukan.');
             }
@@ -136,6 +150,10 @@ class Index extends Component
 
         $this->showEditModal = false;
     }
+
+
+
+
 
 
 }

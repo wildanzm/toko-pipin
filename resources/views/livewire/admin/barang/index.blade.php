@@ -66,6 +66,7 @@
                     <th scope="col" class="px-6 py-3 text-center">Status Pembayaran</th>
                     <th scope="col" class="px-6 py-3 text-center">Hutang</th>
                     <th scope="col" class="px-6 py-3 text-center">Total</th>
+                    <th scope="col" class="px-6 py-3 text-center">Status Pembelian</th>
                     <th scope="col" class="px-6 py-3 text-center">Aksi</th>
                 </tr>
             </thead>
@@ -101,18 +102,34 @@
                                 <span class="inline-block px-3 py-1 text-sm font-semibold text-white bg-green-600 rounded-full">
                                     Lunas
                                 </span>
-                            @else
+                            @elseif ($barang->status_pembayaran === 'belum_lunas')
                                 <span class="inline-block px-3 py-1 text-sm font-semibold text-white bg-red-600 rounded-full">
                                     Belum Lunas
                                 </span>
+                            @else
+                                <span class="inline-block px-3 py-1 text-sm font-semibold text-white rounded-full">
+                                    -
+                                </span>
                             @endif
                         </td>
+                        
                         <td class="px-6 py-4 text-center">
                             Rp {{ number_format($barang->hutang, 0, ',', '.') }}
                         </td>
                         <td class="px-6 py-4 text-center">
                             Rp {{ number_format($barang->harga_total, 0, ',', '.') }}
                         </td>
+                        <td class="px-6 py-4 text-center">
+                            @if ($barang->status_pembelian === 'Diterima')
+                                <span class="inline-block px-3 py-1 text-sm font-semibold text-white bg-cyan-500 rounded-full">
+                                    Diterima
+                                </span>
+                            @else
+                                <span class="inline-block px-3 py-1 text-sm font-semibold text-white bg-orange-500 rounded-full">
+                                    Dikembalikan
+                                </span>
+                            @endif
+                        </div>
                         <td class="px-6 py-4 text-center whitespace-nowrap">
                             <button wire:click="openEditModal({{ $barang->id }})" type="button"
                                 class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600 focus:ring-4 focus:ring-yellow-300 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:focus:ring-yellow-700 mr-2">
@@ -186,6 +203,20 @@
                                 <span class="text-sm text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        <div class="mb-4">
+                            <label for="status_pembelian" class="block text-sm font-medium text-gray-700 dark:text-white">Status Pembelian</label>
+                            <select wire:model="editingBarang.status_pembelian" id="status_pembelian"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:text-white">
+                                <option value="">-- Pilih --</option>
+                                <option value="Diterima">Diterima</option>
+                                <option value="Dikembalikan">Dikembalikan</option>
+                            </select>
+                            @error('editingBarang.status_pembelian')
+                                <span class="text-sm text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                     </div>
 
 

@@ -36,6 +36,7 @@ class StockBarangSeeder extends Seeder
                 'jenis_pembayaran'   => 'tunai',
                 'status_pembayaran'  => 'lunas',
                 'hutang'             => $hutang,
+                'status_pembelian'   => 'Diterima',
                 'nama_toko_suplier'  => $tokoList[$index] ?? 'Suplier Tidak Diketahui',
                 'created_at'         => now(),
                 'updated_at'         => now(),

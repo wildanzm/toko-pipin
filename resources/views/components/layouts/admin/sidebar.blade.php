@@ -99,6 +99,15 @@
                         <span class="flex-1 ms-3 whitespace-nowrap">Hutang</span>
                     </a>
                 </li>
+                <li class="{{ request()->routeIs('admin.retur') ? 'bg-gray-200 dark:bg-gray-800' : '' }}">
+                    <a href="{{ route('admin.retur') }}" class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 10h11M9 21V3M17 16l4-4m0 0l-4-4m4 4H9" />
+                        </svg>
+                        <span>Retur</span>
+                    </a>
+                </li>
             </ul>
 
             {{-- Bagian Profil Pengguna dan Logout (Dropdown) di paling bawah --}}

@@ -19,6 +19,7 @@ class Create extends Component
     public $jenisStock = '';
     public $jenisPembayaran = '';
     public $nominalPembayaran;
+    public $statusPembelian = '';
 
     protected function rules(): array
     {
@@ -29,7 +30,8 @@ class Create extends Component
             'hargaJual' => ['required', 'numeric', 'min:0'],
             'stock' => ['required', 'integer', 'min:1'],
             'jenisStock' => ['required', 'in:liter,pcs,kg'],
-            'jenisPembayaran' => ['required', 'in:tunai,kredit'],
+            'jenisPembayaran' => ['required', 'in:tunai,kredit,-'],
+            'statusPembelian' => ['required', 'in:Dikembalikan,Diterima'],
             'nominalPembayaran' => [
                 'nullable',
                 'numeric',
@@ -51,6 +53,8 @@ class Create extends Component
         'jenisStock.required' => 'Jenis stock wajib dipilih.',
         'jenisPembayaran.required' => 'Jenis pembayaran wajib dipilih.',
         'jenisPembayaran.in' => 'Jenis pembayaran tidak valid.',
+        'StatusPembelian'=> 'Status Pembelian wajib di isi',
+        
     ];
 
     private function generateKodeBarang(): string
@@ -74,8 +78,10 @@ class Create extends Component
 
         $hutang = max($hargaTotal - $pembayaran, 0);
         $statusPembayaran = $hutang > 0 ? 'belum_lunas' : 'lunas';
-
-        
+        if ($this->statusPembelian === 'Dikembalikan') {
+            $statusPembayaran = '-';
+        }
+         
 
 
         StockBarang::create([
@@ -91,6 +97,7 @@ class Create extends Component
             'jenis_pembayaran' => $this->jenisPembayaran,
             'status_pembayaran' => $statusPembayaran,
             'hutang' => $hutang,
+            'status_pembelian' => $this->statusPembelian,
         ]);
 
 
@@ -99,7 +106,7 @@ class Create extends Component
         // Reset form
         $this->reset([
             'namaToko', 'namaBarang', 'hargaBeli', 'hargaJual', 'stock',
-            'jenisStock', 'jenisPembayaran', 'nominalPembayaran'
+            'jenisStock', 'jenisPembayaran', 'nominalPembayaran', 'statusPembelian'
         ]);
 
         $this->stock = 0;
