@@ -90,7 +90,7 @@ class Create extends Component
             'harga_per_satu' => $this->hargaBeli,
             'harga_total' => $hargaTotal,
             'kuantitas' => $this->stock,
-            'jenis_stok' => $this->jenisStock, // ✅ perbaikan di sini
+            'jenis_stock' => $this->jenisStock,
             'harga_jual_per_barang' => $this->hargaJual,
             'nama_toko_suplier' => $this->namaToko,
             'pembayaran' => $pembayaran,

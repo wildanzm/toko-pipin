@@ -9,22 +9,22 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 
 #[Layout('components.layouts.admin')]
-#[Title('Kelola Barang')]
+#[Title('Data Pembelian Barang')]
 class Index extends Component
 {
     use WithPagination;
 
     public string $search = '';
     public int $perPage = 10;
+    public string $filter = 'semua'; // Properti baru untuk menyimpan filter aktif
 
     public bool $showEditModal = false;
     public bool $showDeleteConfirmationModal = false;
 
     public $editingBarang = [];
-
     public ?StockBarang $barangToDelete = null;
 
     protected $queryString = [
@@ -32,34 +32,84 @@ class Index extends Component
         'perPage' => ['except' => 10, 'as' => 'limit'],
     ];
 
-    public function openEditModal(StockBarang $barang)
+    /**
+     * Metode baru untuk mengatur filter dan mereset paginasi
+     */
+    public function setFilter(string $filter): void
     {
-        $this->editingBarang = $barang->toArray(); // ✅ ubah ke array agar bisa @entangle di Blade
-        $this->showEditModal = true;
+        $this->filter = $filter;
+        $this->resetPage();
+    }
+
+    /**
+     * Metode private baru untuk mendapatkan query yang sudah difilter
+     * Ini digunakan untuk render() dan exportPdf() agar konsisten
+     */
+    private function getFilteredQuery(): Builder
+    {
+        $query = StockBarang::query()
+            ->when($this->search, function ($query) {
+                $query->where('nama_barang', 'like', '%' . $this->search . '%')
+                    ->orWhere('kodebarang', 'like', '%' . $this->search . '%') // Disesuaikan agar konsisten
+                    ->orWhere('nama_toko_suplier', 'like', '%' . $this->search . '%');
+            });
+
+        // Terapkan filter berdasarkan periode waktu
+        switch ($this->filter) {
+            case 'harian':
+                $query->whereDate('created_at', today());
+                break;
+            case 'mingguan':
+                $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+                break;
+            case 'bulanan':
+                $query->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year);
+                break;
+            case 'tahunan':
+                $query->whereYear('created_at', now()->year);
+                break;
+        }
+
+        return $query;
+    }
+
+    public function render()
+    {
+        // Gunakan metode getFilteredQuery() untuk mengambil data
+        $barangs = $this->getFilteredQuery()
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->perPage);
+
+        // Ambil harga jual dari tabel Barang
+        $hargaJuals = Barang::pluck('harga_jual', 'kodebarang');
+
+        return view('livewire.admin.barang.index', [
+            'barangs' => $barangs,
+            'hargaJuals' => $hargaJuals,
+        ]);
     }
 
     public function exportPdf()
     {
-        $barangs = StockBarang::query()
-            ->when($this->search, function ($query) {
-                $query->where('nama_barang', 'like', '%' . $this->search . '%')
-                    ->orWhere('kodebarang', 'like', '%' . $this->search . '%')
-                    ->orWhere('nama_toko_suplier', 'like', '%' . $this->search . '%');
-            })
+        // Gunakan metode getFilteredQuery() untuk mengambil data PDF
+        $barangs = $this->getFilteredQuery()
             ->orderBy('created_at', 'desc')
             ->get();
-
-        // Hapus pluck dari tabel Barang karena tidak digunakan
-        // $hargaJuals = Barang::pluck('harga_jual', 'unique_key'); ❌ hapus
 
         $pdf = Pdf::loadView('exports.barang', compact('barangs'))->setPaper('A4', 'landscape');
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'laporan-barang.pdf');
+        }, 'laporan-pembelian-barang.pdf');
     }
 
+    // --- Metode lainnya tetap sama (tidak diubah) ---
 
+    public function openEditModal(StockBarang $barang)
+    {
+        $this->editingBarang = $barang->toArray();
+        $this->showEditModal = true;
+    }
 
     public function confirmDelete(StockBarang $barang)
     {
@@ -77,26 +127,6 @@ class Index extends Component
         $this->barangToDelete = null;
     }
 
-    public function render()
-    {
-        $barangs = StockBarang::query()
-            ->when($this->search, function ($query) {
-                $query->where('nama_barang', 'like', '%' . $this->search . '%')
-                    ->orWhere('uniq_key', 'like', '%' . $this->search . '%')
-                    ->orWhere('nama_toko_suplier', 'like', '%' . $this->search . '%');
-            })
-            ->orderBy('created_at', 'desc')
-            ->paginate($this->perPage);
-
-        // Ambil harga jual dari tabel Barang
-        $hargaJuals = Barang::pluck('harga_jual', 'kodebarang');
-
-        return view('livewire.admin.barang.index', [
-            'barangs' => $barangs,
-            'hargaJuals' => $hargaJuals,
-        ]);
-    }
-
     public function updateProduct()
     {
         $barang = StockBarang::find($this->editingBarang['id']);
@@ -107,8 +137,6 @@ class Index extends Component
         session()->flash('message', 'Data berhasil diperbarui.');
         $this->showEditModal = false;
     }
-
-
 
     public function updateJenisPembayaran()
     {
@@ -150,10 +178,4 @@ class Index extends Component
 
         $this->showEditModal = false;
     }
-
-
-
-
-
-
 }

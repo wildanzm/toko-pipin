@@ -1,9 +1,35 @@
 <div>
     <h1 class="text-3xl font-bold pb-5 dark:text-white">Laporan Hutang Pembelian</h1>
 
-    <div class="flex justify-end mb-4">
-        <a href="{{ route('admin.hutang.export') }}"
-            class="px-4 py-2 text-sm text-white bg-red-600 rounded hover:bg-red-700 transition">
+    {{-- Tombol Filter dan Export --}}
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-3">
+        {{-- Tombol Filter --}}
+        <div class="flex flex-wrap gap-2 text-sm">
+            <button wire:click="setFilter('semua')"
+                class="px-3 py-2 rounded-lg transition {{ $filter === 'semua' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600' }}">
+                Semua
+            </button>
+            <button wire:click="setFilter('harian')"
+                class="px-3 py-2 rounded-lg transition {{ $filter === 'harian' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600' }}">
+                Harian
+            </button>
+            <button wire:click="setFilter('mingguan')"
+                class="px-3 py-2 rounded-lg transition {{ $filter === 'mingguan' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600' }}">
+                Mingguan
+            </button>
+            <button wire:click="setFilter('bulanan')"
+                class="px-3 py-2 rounded-lg transition {{ $filter === 'bulanan' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600' }}">
+                Bulanan
+            </button>
+            <button wire:click="setFilter('tahunan')"
+                class="px-3 py-2 rounded-lg transition {{ $filter === 'tahunan' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600' }}">
+                Tahunan
+            </button>
+        </div>
+
+        {{-- Tombol Export PDF --}}
+        <a href="{{ route('admin.hutang.export', ['filter' => $this->filter, 'export' => 'pdf']) }}" target="_blank"
+            class="w-full sm:w-auto px-4 py-2 text-sm text-center text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
             Export PDF
         </a>
     </div>

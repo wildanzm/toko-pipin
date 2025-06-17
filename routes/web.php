@@ -35,7 +35,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // Product Route
     Route::get('/barang', Index::class)->name('barang.index');
     Route::get('/barang/tambah-barang', Create::class)->name('barang.create');
-    
+
 
     // Route::get('/toko-dan-barang', Barangs::class)->name('barangs');
     // Route::get('/toko-dan-barang/toko', [Barangs::class, 'showTambahTokoModal'])->name('barangs.toko');
@@ -45,8 +45,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::get('/retur', \App\Livewire\Admin\Retur\Index::class)->name('retur');
     Route::get('/retur/export', [\App\Livewire\Admin\Retur\Index::class, 'exportPdf'])->name('retur.export');
-
-    
 });
 
 

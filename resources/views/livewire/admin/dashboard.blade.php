@@ -1,6 +1,6 @@
 <div>
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-        <div class="grid auto-rows-min grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="grid auto-rows-min grid-cols-1 sm:grid-cols-4 md:grid-cols-2 gap-4">
 
 
             {{-- Badge 2: Total Produk (Tema Ungu) --}}

@@ -32,7 +32,7 @@
                     <td>{{ $barang->toko }}</td>
                     <td>{{ ucfirst($barang->jenis_pembayaran) }}</td>
                     <td>{{ ucfirst($barang->status) }}</td>
-                    <td>Rp {{ number_format($barang->hutang, 0, ',', '.') }}</td>
+                    <td>Rp {{ number_format($barang->nominal_hutang, 0, ',', '.') }}</td>
                 </tr>
             @endforeach
         </tbody>
